@@ -1,5 +1,5 @@
 {
-  "main": {
+  "devcentral": {
     "awscloudformation": {
       "AuthRoleName": "amplify-cmpt474-main-64922-authRole",
       "UnauthRoleArn": "arn:aws:iam::905418132207:role/amplify-cmpt474-main-64922-unauthRole",
@@ -70,23 +70,25 @@
           "s3Key": "amplify-builds/questionsLambda-4a6d70736b386d584b4a-build.zip"
         },
         "cmpt47469df6069PostConfirmation": {
-          "deploymentBucketName": "amplify-amplify2ee84313dfd74-staging-35808-deployment",
+          "deploymentBucketName": "amplify-cmpt474-devcentral-221509-deployment",
           "s3Key": "amplify-builds/cmpt47469df6069PostConfirmation-2b584c3639662b766558-build.zip"
         },
+        "questionsLambda": {
+          "deploymentBucketName": "amplify-cmpt474-devcentral-221509-deployment",
+          "s3Key": "amplify-builds/questionsLambda-4a6d70736b386d584b4a-build.zip"
+        },
         "topicLambda": {
-          "deploymentBucketName": "amplify-amplify2ee84313dfd74-staging-35808-deployment",
+          "deploymentBucketName": "amplify-cmpt474-devcentral-221509-deployment",
           "s3Key": "amplify-builds/topicLambda-394c666f4c6f54304664-build.zip"
         },
         "topicsTableTrigger3a854fee": {
-          "deploymentBucketName": "amplify-amplify2ee84313dfd74-staging-35808-deployment",
+          "deploymentBucketName": "amplify-cmpt474-devcentral-221509-deployment",
           "s3Key": "amplify-builds/topicsTableTrigger3a854fee-532f734547686f775a63-build.zip"
         },
         "usersLambda": {
-          "deploymentBucketName": "amplify-amplify2ee84313dfd74-staging-35808-deployment",
+          "deploymentBucketName": "amplify-cmpt474-devcentral-221509-deployment",
           "s3Key": "amplify-builds/usersLambda-325a58562b4533766552-build.zip"
-        }
-      },
-      "storage": {
+        },
         "questionsDB": {},
         "topicsTable": {},
         "usersDB": {}
@@ -171,6 +173,21 @@
       },
       "storage": {
         "questionsDB": {},
+        "topicsTable": {},
+        "usersDB": {}
+      }
+    }
+  },
+  "dev": {
+    "categories": {
+      "function": {
+        "cmpt47469df6069PostConfirmation": {},
+        "questionsLambda": {},
+        "topicLambda": {},
+        "topicsTableTrigger3a854fee": {},
+        "usersLambda": {},
+        "questionsDB": {},
+        "topicsTable": {},
         "usersDB": {}
       }
     }
