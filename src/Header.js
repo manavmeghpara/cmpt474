@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { fetchUserAttributes } from '@aws-amplify/auth';
 
 
 const Header = () => {
-
+  const [userEmail, setUserEmail] = useState("");
   // Function to print access token and id token
   const printUserAttributes = async () => {
     try {
       const userAttributes = await fetchUserAttributes();
+      setUserEmail(userAttributes.email);
       console.log('Email:', userAttributes.email);
     }
     catch (e) { console.log(e); }
   };
-
+  printUserAttributes();
   return (
     <header style={headerStyle}>
       <div style={leftContainer}>
@@ -37,7 +38,7 @@ const Header = () => {
       <div style={rightContainer}>
         <div style={userInfoStyle}>
           <div style={userContainerStyle}>
-            <span style={usernameStyle}>userAttributes.email</span>
+            <span style={usernameStyle}>{userEmail}</span>
             <span style={accountTypeStyle}>Account Type</span>
           </div>
         </div>

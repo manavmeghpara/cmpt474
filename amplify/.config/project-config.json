@@ -2,7 +2,7 @@
   "providers": [
     "awscloudformation"
   ],
-  "projectName": "cmpt474",
+  "projectName": "cmpt474final",
   "version": "3.1",
   "frontend": "javascript",
   "javascript": {
