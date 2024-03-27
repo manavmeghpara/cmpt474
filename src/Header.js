@@ -1,19 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchUserAttributes } from '@aws-amplify/auth';
+import { get } from "aws-amplify/api";
+
 
 
 const Header = () => {
   const [userEmail, setUserEmail] = useState("");
+  const [userRole, setUserRole] = useState(null);
+
   // Function to print access token and id token
   const printUserAttributes = async () => {
     try {
       const userAttributes = await fetchUserAttributes();
       setUserEmail(userAttributes.email);
       console.log('Email:', userAttributes.email);
+      getUsers();
     }
     catch (e) { console.log(e); }
   };
-  printUserAttributes();
+
+  const getUsers = async () => {
+    try {
+      const restOperation = get({
+        apiName: "usersApi",
+        path: "/users",
+      });
+      const { body } = await restOperation.response;
+      const response = await body.json();
+      const user = response.data.find(user => user.email === userEmail);
+      console.log(user);
+      setUserRole(user.role);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    printUserAttributes();
+  }, [userEmail, userRole]);
+  
   return (
     <header style={headerStyle}>
       <div style={leftContainer}>
@@ -39,7 +64,7 @@ const Header = () => {
         <div style={userInfoStyle}>
           <div style={userContainerStyle}>
             <span style={usernameStyle}>{userEmail}</span>
-            <span style={accountTypeStyle}>Account Type</span>
+            <span style={accountTypeStyle}>{userRole}</span>
           </div>
         </div>
       </div>
