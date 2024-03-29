@@ -34,6 +34,7 @@ const Users = () => {
   const [reload, setReload] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
 
   const handleClickOpen = (user) => {
     setSelectedUser(user);
@@ -59,6 +60,7 @@ const Users = () => {
           body: {
             email: selectedUser.email,
             role: selectedRole,
+            userEmail,
           },
         },
       });
@@ -80,6 +82,12 @@ const Users = () => {
         const restOperation = get({
           apiName: "usersApi",
           path: "/users",
+          options: {
+            queryParams: {
+              userEmail,
+              getAll: true,
+            },
+          },
         });
         const { body } = await restOperation.response;
         const response = await body.json();
@@ -90,14 +98,15 @@ const Users = () => {
       setIsLoading(false);
     }
     fetchData();
-  }, [reload]);
+  }, [reload, userEmail, isAdmin]);
 
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
       try {
-        const { role } = await getUserInfo();
+        const { role, email } = await getUserInfo();
         setIsAdmin(role === "admin");
+        setUserEmail(email);
       } catch (error) {
         console.error(error);
       }

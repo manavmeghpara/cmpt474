@@ -9,7 +9,7 @@ export const getUserInfo = async () => {
     path: "/users",
     options: {
       queryParams: {
-        email: signInDetails.loginId,
+        userEmail: signInDetails.loginId,
       },
     },
   });

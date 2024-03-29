@@ -8,15 +8,33 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
  */
 const server = awsServerlessExpress.createServer(app);
 
-/**
- * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
- */
+const getUser = async (clientEmail) => {
+  try {
+    const amplifyEnv = process.env.ENV;
+    const tableName = `usersTable-${amplifyEnv}`;
+
+    const params = {
+      TableName: tableName,
+      Key: {
+        email: clientEmail,
+      },
+    };
+
+    const { Item } = await dynamoDB.get(params).promise();
+    const { role, email } = Item || {};
+    return { role, email };
+  } catch (e) {
+    return { role: undefined, email: undefined };
+  }
+};
+
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
 exports.handler = async (event, context) => {
   const { httpMethod, body, queryStringParameters } = event;
-  console.log(`EVENT NEW: ${JSON.stringify(event)}`);
+  console.log(`EVENT: ${JSON.stringify(event)}`);
+
   const result = await awsServerlessExpress.proxy(
     server,
     event,
@@ -29,7 +47,28 @@ exports.handler = async (event, context) => {
 
   switch (httpMethod) {
     case "GET": {
-      if (!queryStringParameters) {
+      const { userEmail: clientEmail, getAll = false } =
+        queryStringParameters || {};
+      if (!clientEmail) {
+        return {
+          statusCode: 404,
+          body: JSON.stringify({ message: "Not Found" }),
+        };
+      }
+      const { role, email } = await getUser(clientEmail);
+      if (!role || !email) {
+        return {
+          statusCode: 404,
+          body: JSON.stringify({ message: "Not Found" }),
+        };
+      }
+      if (getAll) {
+        if (role !== "admin") {
+          return {
+            statusCode: 404,
+            body: JSON.stringify({ message: "Not Found" }),
+          };
+        }
         const params = {
           TableName: tableName,
         };
@@ -49,15 +88,6 @@ exports.handler = async (event, context) => {
 
         return result;
       }
-      const { email: userEmail } = queryStringParameters;
-      const params = {
-        TableName: tableName,
-        Key: {
-          email: userEmail,
-        },
-      };
-      const { Item } = await dynamoDB.get(params).promise();
-      const { role, email } = Item;
       result.body = JSON.stringify({
         role,
         email,
@@ -66,7 +96,26 @@ exports.handler = async (event, context) => {
       return result;
     }
     case "PUT": {
-      const { email, role } = JSON.parse(body);
+      const { email, role, userEmail: clientEmail } = JSON.parse(body);
+      if (!clientEmail) {
+        return {
+          statusCode: 404,
+          body: JSON.stringify({ message: "Not Found" }),
+        };
+      }
+      const { role: clientRole, email: clientDbEmail } = await getUser(
+        clientEmail
+      );
+      if (
+        !clientRole ||
+        !clientDbEmail ||
+        (clientRole && clientRole !== "admin")
+      ) {
+        return {
+          statusCode: 404,
+          body: JSON.stringify({ message: "Not Found" }),
+        };
+      }
       const payload = {
         TableName: tableName,
         Item: {
