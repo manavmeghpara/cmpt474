@@ -61,12 +61,8 @@ const Header = () => {
       </div>
       <div style={rightContainer}>
         {userEmail && (
-          <div style={userInfoStyle}>
-            <a href="/user" style={linkStyle}>
-              <div style={userContainerStyle}>
-                <span style={usernameStyle}>{userEmail}</span>
-              </div>
-            </a>
+          <div style={userContainerStyle}>
+            <span style={usernameStyle}>{userEmail}</span>
           </div>
         )}
       </div>
