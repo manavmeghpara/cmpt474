@@ -62,10 +62,12 @@ const Header = () => {
       </div>
       <div style={rightContainer}>
         <div style={userInfoStyle}>
-          <div style={userContainerStyle}>
-            <span style={usernameStyle}>{userEmail}</span>
-            <span style={accountTypeStyle}>{userRole}</span>
-          </div>
+          <a href='/user' style={linkStyle}>
+            <div style={userContainerStyle}>
+              <span style={usernameStyle}>{userEmail}</span>
+              <span style={accountTypeStyle}>{userRole}</span>
+            </div>
+          </a>
         </div>
       </div>
     </header>
