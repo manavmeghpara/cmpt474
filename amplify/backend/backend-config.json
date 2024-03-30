@@ -148,6 +148,88 @@
       "service": "Lambda"
     }
   },
+  "parameters": {
+    "AMPLIFY_function_cmpt47469df6069PostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "cmpt47469df6069PostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_cmpt47469df6069PostConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "cmpt47469df6069PostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_questionsLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "questionsLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_questionsLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "questionsLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_topicLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "topicLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_topicLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "topicLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_topicsTableTrigger3a854fee_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "topicsTableTrigger3a854fee"
+        }
+      ]
+    },
+    "AMPLIFY_function_topicsTableTrigger3a854fee_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "topicsTableTrigger3a854fee"
+        }
+      ]
+    },
+    "AMPLIFY_function_usersLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "usersLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_usersLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "usersLambda"
+        }
+      ]
+    }
+  },
   "storage": {
     "questionsDB": {
       "providerPlugin": "awscloudformation",

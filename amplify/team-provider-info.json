@@ -185,7 +185,8 @@
       "UnauthRoleName": "amplify-cmpt474-mm-153336-unauthRole",
       "StackName": "amplify-cmpt474-mm-153336",
       "StackId": "arn:aws:cloudformation:us-east-2:992382806989:stack/amplify-cmpt474-mm-153336/8ef311c0-eee5-11ee-ac30-02dd9b4998c3",
-      "AmplifyAppId": "dppbr8pycxm55"
+      "AmplifyAppId": "dppbr8pycxm55",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-cmpt474-mm-153336-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
@@ -193,11 +194,35 @@
         "cmpt47469df6069": {}
       },
       "function": {
-        "cmpt47469df6069PostConfirmation": {},
-        "questionsLambda": {},
-        "topicLambda": {},
-        "topicsTableTrigger3a854fee": {},
-        "usersLambda": {},
+        "cmpt47469df6069PostConfirmation": {
+          "deploymentBucketName": "amplify-cmpt474-mm-153336-deployment",
+          "s3Key": "amplify-builds/cmpt47469df6069PostConfirmation-2b584c3639662b766558-build.zip"
+        },
+        "questionsLambda": {
+          "deploymentBucketName": "amplify-cmpt474-mm-153336-deployment",
+          "s3Key": "amplify-builds/questionsLambda-4a6d70736b386d584b4a-build.zip"
+        },
+        "topicLambda": {
+          "deploymentBucketName": "amplify-cmpt474-mm-153336-deployment",
+          "s3Key": "amplify-builds/topicLambda-394c666f4c6f54304664-build.zip"
+        },
+        "topicsTableTrigger3a854fee": {
+          "deploymentBucketName": "amplify-cmpt474-mm-153336-deployment",
+          "s3Key": "amplify-builds/topicsTableTrigger3a854fee-532f734547686f775a63-build.zip"
+        },
+        "usersLambda": {
+          "deploymentBucketName": "amplify-cmpt474-mm-153336-deployment",
+          "s3Key": "amplify-builds/usersLambda-325a58562b4533766552-build.zip"
+        },
+        "questionsDB": {},
+        "topicsTable": {},
+        "usersDB": {}
+      },
+      "api": {
+        "questionsApi": {},
+        "usersApi": {}
+      },
+      "storage": {
         "questionsDB": {},
         "topicsTable": {},
         "usersDB": {}
