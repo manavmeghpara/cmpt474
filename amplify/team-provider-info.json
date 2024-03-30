@@ -1,4 +1,51 @@
 {
+  "sunshine": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cmpt474-sunshine-24623-authRole",
+      "UnauthRoleArn": "arn:aws:iam::992382806989:role/amplify-cmpt474-sunshine-24623-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::992382806989:role/amplify-cmpt474-sunshine-24623-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-cmpt474-sunshine-24623-deployment",
+      "UnauthRoleName": "amplify-cmpt474-sunshine-24623-unauthRole",
+      "StackName": "amplify-cmpt474-sunshine-24623",
+      "StackId": "arn:aws:cloudformation:us-east-2:992382806989:stack/amplify-cmpt474-sunshine-24623/32de89e0-ebe4-11ee-8dcb-0a467cbfbedd",
+      "AmplifyAppId": "d1zl4tbqdozz56",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-cmpt474-sunshine-24623-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-cmpt474-sunshine-24623-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "cmpt47469df6069": {}
+      },
+      "function": {
+        "cmpt47469df6069PostConfirmation": {
+          "deploymentBucketName": "amplify-cmpt474-sunshine-24623-deployment",
+          "s3Key": "amplify-builds/cmpt47469df6069PostConfirmation-2b584c3639662b766558-build.zip"
+        },
+        "questionsLambda": {
+          "deploymentBucketName": "amplify-cmpt474-sunshine-24623-deployment",
+          "s3Key": "amplify-builds/questionsLambda-4a6d70736b386d584b4a-build.zip"
+        },
+        "topicLambda": {
+          "deploymentBucketName": "amplify-cmpt474-sunshine-24623-deployment",
+          "s3Key": "amplify-builds/topicLambda-394c666f4c6f54304664-build.zip"
+        },
+        "topicsTableTrigger3a854fee": {
+          "deploymentBucketName": "amplify-cmpt474-sunshine-24623-deployment",
+          "s3Key": "amplify-builds/topicsTableTrigger3a854fee-532f734547686f775a63-build.zip"
+        },
+        "usersLambda": {
+          "deploymentBucketName": "amplify-cmpt474-sunshine-24623-deployment",
+          "s3Key": "amplify-builds/usersLambda-325a58562b4533766552-build.zip"
+        }
+      },
+      "storage": {
+        "questionsDB": {},
+        "topicsTable": {},
+        "usersDB": {}
+      }
+    }
+  },
   "main": {
     "awscloudformation": {
       "AuthRoleName": "amplify-cmpt474-main-64922-authRole",
