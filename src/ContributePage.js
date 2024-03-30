@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { fetchUserAttributes } from '@aws-amplify/auth';
 import Header from "./Header";
 import {
   Button,
@@ -25,6 +26,40 @@ const ContributePage = () => {
   const [options, setOptions] = useState([]);
   const [isTextFieldVisible, setTextFieldVisible] = useState(false);
   const [topicInput, setTopicInput] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userRole, setUserRole] = useState(null);
+  const [userLoading, setUserLoading] = useState(true);
+
+
+  const printUserAttributes = async () => {
+    try {
+      const userAttributes = await fetchUserAttributes();
+      setUserEmail(userAttributes.email);
+      console.log('Email:', userAttributes.email);
+      getUsers();
+
+    }
+    catch (e) { console.log(e); }
+  };
+  printUserAttributes();
+
+  const getUsers = async () => {
+    try {
+      const restOperation = get({
+        apiName: "usersApi",
+        path: "/users",
+      });
+      const { body } = await restOperation.response;
+      const response = await body.json();
+      const user = response.data.find(user => user.email === userEmail);
+      console.log(user);
+      setUserRole(user.role);
+      setUserLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
 
   const getTopics = async () => {
     try {
@@ -112,6 +147,12 @@ const ContributePage = () => {
   };
 
   return (
+
+  <div>
+  {userLoading ? (
+    <Loader />
+  )
+  : userRole === 'admin' || userRole === 'contributor' ? (
     <View
       className='App'
       style={{
@@ -232,6 +273,31 @@ const ContributePage = () => {
       </div>
       <Footer />
     </View>
+  ): (
+    <View
+    className='App'
+    style={{
+      minHeight: "100vh",
+      paddingBottom: "50px",
+      boxSizing: "border-box",
+      paddingTop: "100px",
+    }}
+    >
+      <Header />
+      <div style={{ maxWidth: "500px", margin: "auto" }}>
+          <div>
+            {/* Render unauthorized access message */}
+            <h1>Unauthorized Access</h1>
+            <p>You do not have permission to access this page.</p>
+            <p>Your current role is viewer only!</p>
+            <p>Contact administrator to update role</p>
+          </div>
+      </div>
+      <Footer />
+    </View>
+
+  )}
+  </div>
   );
 };
 
