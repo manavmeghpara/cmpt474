@@ -15,13 +15,10 @@
     },
     "categories": {
       "auth": {
-        "cmpt47469df6069": {}
+        "cmpt47469df6069": {},
+        "cmpt474": {}
       },
       "function": {
-        "cmpt47469df6069PostConfirmation": {
-          "deploymentBucketName": "amplify-cmpt474-marga-03539-deployment",
-          "s3Key": "amplify-builds/cmpt47469df6069PostConfirmation-2b584c3639662b766558-build.zip"
-        },
         "questionsLambda": {
           "deploymentBucketName": "amplify-cmpt474-marga-03539-deployment",
           "s3Key": "amplify-builds/questionsLambda-4a6d70736b386d584b4a-build.zip"
@@ -37,7 +34,8 @@
         "usersLambda": {
           "deploymentBucketName": "amplify-cmpt474-marga-03539-deployment",
           "s3Key": "amplify-builds/usersLambda-6c38436b4d4633363563-build.zip"
-        }
+        },
+        "cmpt474PostConfirmation": {}
       },
       "storage": {
         "questionsDB": {},
@@ -66,16 +64,12 @@
     "categories": {
       "function": {
         "questionsLambda": {
-          "deploymentBucketName": "amplify-amplify2ee84313dfd74-staging-35808-deployment",
+          "deploymentBucketName": "amplify-cmpt474-devcentral-221509-deployment",
           "s3Key": "amplify-builds/questionsLambda-4a6d70736b386d584b4a-build.zip"
         },
         "cmpt47469df6069PostConfirmation": {
           "deploymentBucketName": "amplify-cmpt474-devcentral-221509-deployment",
           "s3Key": "amplify-builds/cmpt47469df6069PostConfirmation-2b584c3639662b766558-build.zip"
-        },
-        "questionsLambda": {
-          "deploymentBucketName": "amplify-cmpt474-devcentral-221509-deployment",
-          "s3Key": "amplify-builds/questionsLambda-4a6d70736b386d584b4a-build.zip"
         },
         "topicLambda": {
           "deploymentBucketName": "amplify-cmpt474-devcentral-221509-deployment",
@@ -98,20 +92,6 @@
         "usersApi": {}
       },
       "storage": {
-        "questionsDB": {},
-        "topicsTable": {},
-        "usersDB": {}
-      }
-    }
-  },
-  "dev": {
-    "categories": {
-      "function": {
-        "cmpt47469df6069PostConfirmation": {},
-        "questionsLambda": {},
-        "topicLambda": {},
-        "topicsTableTrigger3a854fee": {},
-        "usersLambda": {},
         "questionsDB": {},
         "topicsTable": {},
         "usersDB": {}
