@@ -1,4 +1,51 @@
 {
+  "glenine": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cmpt474-glenine-717b4-authRole",
+      "UnauthRoleArn": "arn:aws:iam::576274517412:role/amplify-cmpt474-glenine-717b4-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::576274517412:role/amplify-cmpt474-glenine-717b4-authRole",
+      "Region": "ca-central-1",
+      "DeploymentBucketName": "amplify-cmpt474-glenine-717b4-deployment",
+      "UnauthRoleName": "amplify-cmpt474-glenine-717b4-unauthRole",
+      "StackName": "amplify-cmpt474-glenine-717b4",
+      "StackId": "arn:aws:cloudformation:ca-central-1:576274517412:stack/amplify-cmpt474-glenine-717b4/2d3750b0-efab-11ee-8d11-02296c77f835",
+      "AmplifyAppId": "d3qr6z1m6zg080",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-cmpt474-glenine-717b4-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-cmpt474-glenine-717b4-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "cmpt474": {}
+      },
+      "function": {
+        "cmpt474PostConfirmation": {
+          "deploymentBucketName": "amplify-cmpt474-glenine-717b4-deployment",
+          "s3Key": "amplify-builds/cmpt474PostConfirmation-4d7431414d79316c6d6b-build.zip"
+        },
+        "questionsLambda": {
+          "deploymentBucketName": "amplify-cmpt474-glenine-717b4-deployment",
+          "s3Key": "amplify-builds/questionsLambda-4a6d70736b386d584b4a-build.zip"
+        },
+        "topicLambda": {
+          "deploymentBucketName": "amplify-cmpt474-glenine-717b4-deployment",
+          "s3Key": "amplify-builds/topicLambda-394c666f4c6f54304664-build.zip"
+        },
+        "topicsTableTrigger3a854fee": {
+          "deploymentBucketName": "amplify-cmpt474-glenine-717b4-deployment",
+          "s3Key": "amplify-builds/topicsTableTrigger3a854fee-532f734547686f775a63-build.zip"
+        },
+        "usersLambda": {
+          "deploymentBucketName": "amplify-cmpt474-glenine-717b4-deployment",
+          "s3Key": "amplify-builds/usersLambda-58576b66666c2b573445-build.zip"
+        }
+      },
+      "storage": {
+        "questionsDB": {},
+        "topicsTable": {},
+        "usersDB": {}
+      }
+    }
+  },
   "marga": {
     "awscloudformation": {
       "AuthRoleName": "amplify-cmpt474-marga-03539-authRole",

@@ -15,14 +15,15 @@ export type AmplifyDependentResourcesAttributes = {
     "cmpt474": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
-      "CreatedSNSRole": "string",
+      "IdentityPoolId": "string",
+      "IdentityPoolName": "string",
       "UserPoolArn": "string",
       "UserPoolId": "string",
       "UserPoolName": "string"
     }
   },
   "function": {
-    "cmpt47469df6069PostConfirmation": {
+    "cmpt474PostConfirmation": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
