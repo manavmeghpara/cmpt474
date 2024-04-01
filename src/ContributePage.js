@@ -13,6 +13,7 @@ import {
   Loader,
 } from "@aws-amplify/ui-react";
 import { post, get } from "aws-amplify/api";
+import { getUserInfo } from "./utils";
 import "./Contribute.css";
 import Footer from "./Footer";
 
@@ -26,40 +27,27 @@ const ContributePage = () => {
   const [options, setOptions] = useState([]);
   const [isTextFieldVisible, setTextFieldVisible] = useState(false);
   const [topicInput, setTopicInput] = useState("");
-  const [userEmail, setUserEmail] = useState("");
   const [userRole, setUserRole] = useState(null);
   const [userLoading, setUserLoading] = useState(true);
 
 
-  const printUserAttributes = async () => {
-    try {
-      const userAttributes = await fetchUserAttributes();
-      setUserEmail(userAttributes.email);
-      console.log('Email:', userAttributes.email);
-      getUsers();
 
-    }
-    catch (e) { console.log(e); }
-  };
-  printUserAttributes();
+  useEffect(()=>{
+    const getUsers = async () => {
+      try {
+        const { role, email } = await getUserInfo();
+        console.log(email);
+        setUserRole(role);
+        setUserLoading(false);
+      } catch (error) {
+        console.error(error);
+        setUserLoading(false);
+      }
+    };
+    getUsers();
+  }, [])
 
-  const getUsers = async () => {
-    try {
-      const restOperation = get({
-        apiName: "usersApi",
-        path: "/users",
-      });
-      const { body } = await restOperation.response;
-      const response = await body.json();
-      const user = response.data.find(user => user.email === userEmail);
-      console.log(user);
-      setUserRole(user.role);
-      setUserLoading(false);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  
+
 
   const getTopics = async () => {
     try {
