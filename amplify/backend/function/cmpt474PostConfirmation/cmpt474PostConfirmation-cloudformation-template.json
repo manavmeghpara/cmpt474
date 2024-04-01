@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.10.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.10.3\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "GROUP": {
       "Type": "String",
@@ -67,12 +67,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "cmpt47469df6069PostConfirmation",
+            "cmpt474PostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "cmpt47469df6069PostConfirmation",
+                  "cmpt474PostConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -122,12 +122,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "cmpt47469df6069PostConfirmation",
+            "cmpt474PostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "cmpt47469df6069PostConfirmation",
+                  "cmpt474PostConfirmation",
                   "-",
                   {
                     "Ref": "env"

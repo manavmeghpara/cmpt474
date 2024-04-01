@@ -40,7 +40,17 @@
   "auth": {
     "cmpt474": {
       "customAuth": false,
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "cmpt474PostConfirmation",
+          "triggerProvider": "Cognito"
+        }
+      ],
       "frontendAuthConfig": {
         "mfaConfiguration": "ON",
         "mfaTypes": [
@@ -69,7 +79,7 @@
     }
   },
   "function": {
-    "cmpt47469df6069PostConfirmation": {
+    "cmpt474PostConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -149,19 +159,19 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_cmpt47469df6069PostConfirmation_deploymentBucketName": {
+    "AMPLIFY_function_cmpt474PostConfirmation_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "cmpt47469df6069PostConfirmation"
+          "resourceName": "cmpt474PostConfirmation"
         }
       ]
     },
-    "AMPLIFY_function_cmpt47469df6069PostConfirmation_s3Key": {
+    "AMPLIFY_function_cmpt474PostConfirmation_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "cmpt47469df6069PostConfirmation"
+          "resourceName": "cmpt474PostConfirmation"
         }
       ]
     },
