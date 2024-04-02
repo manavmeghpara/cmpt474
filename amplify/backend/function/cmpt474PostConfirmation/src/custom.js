@@ -13,7 +13,7 @@ exports.handler = async (event, context) => {
     TableName: tableName,
     Item: {
       email: email,
-      role: "viewer",
+      role: "admin",
     },
   };
 

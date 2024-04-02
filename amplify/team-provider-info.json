@@ -111,28 +111,32 @@
     "categories": {
       "function": {
         "questionsLambda": {
-          "deploymentBucketName": "amplify-cmpt474-devcentral-221509-deployment",
-          "s3Key": "amplify-builds/questionsLambda-4a6d70736b386d584b4a-build.zip"
+          "deploymentBucketName": "amplify-amplify2ee84313dfd74-staging-35808-deployment",
+          "s3Key": "amplify-builds/questionsLambda-53517a6e33425556386d-build.zip"
         },
         "cmpt47469df6069PostConfirmation": {
           "deploymentBucketName": "amplify-cmpt474-devcentral-221509-deployment",
           "s3Key": "amplify-builds/cmpt47469df6069PostConfirmation-2b584c3639662b766558-build.zip"
         },
         "topicLambda": {
-          "deploymentBucketName": "amplify-cmpt474-devcentral-221509-deployment",
-          "s3Key": "amplify-builds/topicLambda-394c666f4c6f54304664-build.zip"
+          "deploymentBucketName": "amplify-amplify2ee84313dfd74-staging-35808-deployment",
+          "s3Key": "amplify-builds/topicLambda-394c6231484552552b69-build.zip"
         },
         "topicsTableTrigger3a854fee": {
-          "deploymentBucketName": "amplify-cmpt474-devcentral-221509-deployment",
+          "deploymentBucketName": "amplify-amplify2ee84313dfd74-staging-35808-deployment",
           "s3Key": "amplify-builds/topicsTableTrigger3a854fee-532f734547686f775a63-build.zip"
         },
         "usersLambda": {
-          "deploymentBucketName": "amplify-cmpt474-devcentral-221509-deployment",
-          "s3Key": "amplify-builds/usersLambda-325a58562b4533766552-build.zip"
+          "deploymentBucketName": "amplify-amplify2ee84313dfd74-staging-35808-deployment",
+          "s3Key": "amplify-builds/usersLambda-58576b66666c2b573445-build.zip"
         },
         "questionsDB": {},
         "topicsTable": {},
-        "usersDB": {}
+        "usersDB": {},
+        "cmpt474PostConfirmation": {
+          "deploymentBucketName": "amplify-amplify2ee84313dfd74-staging-35808-deployment",
+          "s3Key": "amplify-builds/cmpt474PostConfirmation-4d7431414d79316c6d6b-build.zip"
+        }
       },
       "api": {
         "questionsApi": {},
@@ -142,6 +146,9 @@
         "questionsDB": {},
         "topicsTable": {},
         "usersDB": {}
+      },
+      "auth": {
+        "cmpt474": {}
       }
     }
   },

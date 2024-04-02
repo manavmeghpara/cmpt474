@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { fetchUserAttributes } from '@aws-amplify/auth';
 import Header from "./Header";
 import {
   Button,
@@ -28,16 +27,16 @@ const ContributePage = () => {
   const [isTextFieldVisible, setTextFieldVisible] = useState(false);
   const [topicInput, setTopicInput] = useState("");
   const [userRole, setUserRole] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
   const [userLoading, setUserLoading] = useState(true);
 
-
-
-  useEffect(()=>{
+  useEffect(() => {
     const getUsers = async () => {
       try {
         const { role, email } = await getUserInfo();
         console.log(email);
         setUserRole(role);
+        setUserEmail(email);
         setUserLoading(false);
       } catch (error) {
         console.error(error);
@@ -45,9 +44,7 @@ const ContributePage = () => {
       }
     };
     getUsers();
-  }, [])
-
-
+  }, []);
 
   const getTopics = async () => {
     try {
@@ -79,8 +76,8 @@ const ContributePage = () => {
 
   const saveTopic = async () => {
     if (topicInput) {
+      setLoading(true);
       try {
-        setLoading(true);
         const restOperation = post({
           apiName: "questionsApi",
           path: "/topics",
@@ -88,6 +85,7 @@ const ContributePage = () => {
             body: {
               topicsId: crypto.randomUUID(),
               topicName: topicInput,
+              email: userEmail,
             },
           },
         });
@@ -119,6 +117,7 @@ const ContributePage = () => {
             question: questionContent,
             answer: toggled,
             topic: selectedTag,
+            email: userEmail,
           },
         },
       });
@@ -135,157 +134,164 @@ const ContributePage = () => {
   };
 
   return (
+    <div>
+      {userLoading ? (
+        <Loader />
+      ) : userRole !== "viewer" ? (
+        <View
+          className='App'
+          style={{
+            minHeight: "100vh",
+            paddingBottom: "50px",
+            boxSizing: "border-box",
+            paddingTop: "100px",
+          }}
+        >
+          <Header />
+          <div style={{ maxWidth: "500px", margin: "auto" }}>
+            <h2>Submit Your Questions</h2>
+            <p>
+              Welcome to our question submission form! Your input helps us grow
+              our knowledge base. Please use the form below to submit new
+              questions. Make sure to provide a clear title and description for
+              each question. Your contributions are greatly appreciated!
+            </p>
 
-  <div>
-  {userLoading ? (
-    <Loader />
-  )
-  : userRole === 'admin' || userRole === 'contributor' ? (
-    <View
-      className='App'
-      style={{
-        minHeight: "100vh",
-        paddingBottom: "50px",
-        boxSizing: "border-box",
-        paddingTop: "100px",
-      }}
-    >
-      <Header />
-      <div style={{ maxWidth: "500px", margin: "auto" }}>
-        <h2>Submit Your Questions</h2>
-        <p>
-          Welcome to our question submission form! Your input helps us grow our
-          knowledge base. Please use the form below to submit new questions.
-          Make sure to provide a clear title and description for each question.
-          Your contributions are greatly appreciated!
-        </p>
+            {loading && <Loader variation='linear' />}
+            <form onSubmit={handleSubmit}>
+              <Flex direction='column' gap='2rem'>
+                <TextField
+                  name='title'
+                  placeholder='Question Title'
+                  label='Question Title'
+                  labelHidden
+                  variation='quiet'
+                  required
+                  value={questionTitle}
+                  onChange={(event) => setQuestionTitle(event.target.value)}
+                />
+                <SelectField
+                  label='Topic'
+                  onChange={(event) => setSelectedTag(event.target.value)}
+                  options={options}
+                  value={selectedTag}
+                  placeholder='Choose a topic'
+                  required
+                />
 
-        {loading && <Loader variation='linear' />}
-        <form onSubmit={handleSubmit}>
-          <Flex direction='column' gap='2rem'>
-            <TextField
-              name='title'
-              placeholder='Question Title'
-              label='Question Title'
-              labelHidden
-              variation='quiet'
-              required
-              value={questionTitle}
-              onChange={(event) => setQuestionTitle(event.target.value)}
-            />
-            <SelectField
-              label='Topic'
-              onChange={(event) => setSelectedTag(event.target.value)}
-              options={options}
-              value={selectedTag}
-              placeholder='Choose a topic'
-              required
-            />
+                <Flex direction='column' style={{ marginBottom: "30px" }}>
+                  <Button
+                    onClick={toggleTextFieldVisibility}
+                    variation='primary'
+                  >
+                    Create new topic
+                  </Button>
+                  {isTextFieldVisible && (
+                    <div>
+                      <TextField
+                        name='topic'
+                        placeholder='React, AWS, etc.'
+                        label='New topic'
+                        labelHidden
+                        required
+                        value={topicInput}
+                        onChange={(event) => setTopicInput(event.target.value)}
+                      />
+                      <div style={{ marginTop: "10px" }}>
+                        <Button
+                          onClick={saveTopic}
+                          style={{ marginRight: "10px" }}
+                        >
+                          Save
+                        </Button>
+                        <Button onClick={() => setTopicInput("")}>Clear</Button>
+                      </div>
+                    </div>
+                  )}
+                </Flex>
 
-            <Flex direction='column' style={{ marginBottom: "30px" }}>
-              <Button onClick={toggleTextFieldVisibility} variation='primary'>
-                Create new topic
-              </Button>
-              {isTextFieldVisible && (
-                <div>
-                  <TextField
-                    name='topic'
-                    placeholder='React, AWS, etc.'
-                    label='New topic'
+                <div
+                  style={{
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    padding: "0.5rem",
+                  }}
+                >
+                  <TextAreaField
+                    name='question'
+                    placeholder='Question'
+                    label='Question'
                     labelHidden
+                    variation='quiet'
                     required
-                    value={topicInput}
-                    onChange={(event) => setTopicInput(event.target.value)}
+                    rows={6}
+                    style={{
+                      width: "100%",
+                      border: "none",
+                      outline: "none",
+                      resize: "none",
+                    }}
+                    value={questionContent}
+                    onChange={(event) => setQuestionContent(event.target.value)}
                   />
-                  <div style={{ marginTop: "10px" }}>
-                    <Button onClick={saveTopic} style={{ marginRight: "10px" }}>
-                      Save
-                    </Button>
-                    <Button onClick={() => setTopicInput("")}>Clear</Button>
-                  </div>
                 </div>
-              )}
-            </Flex>
+                <div>
+                  <SwitchField
+                    checked={toggled}
+                    onChange={handleToggle}
+                    label='Answer'
+                    key='answer'
+                    trackColor={"red"}
+                    trackCheckedColor={"green"}
+                  />
+                  <p>{toggled ? "True" : "False"}</p>
+                </div>
 
-            <div
-              style={{
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                padding: "0.5rem",
-              }}
-            >
-              <TextAreaField
-                name='question'
-                placeholder='Question'
-                label='Question'
-                labelHidden
-                variation='quiet'
-                required
-                rows={6}
-                style={{
-                  width: "100%",
-                  border: "none",
-                  outline: "none",
-                  resize: "none",
-                }}
-                value={questionContent}
-                onChange={(event) => setQuestionContent(event.target.value)}
-              />
-            </div>
-            <div>
-              <SwitchField
-                checked={toggled}
-                onChange={handleToggle}
-                label='Answer'
-                key='answer'
-                trackColor={"red"}
-                trackCheckedColor={"green"}
-              />
-              <p>{toggled ? "True" : "False"}</p>
-            </div>
-
-            {submitted && (
-              <Alert variation='success' isDismissible={true} hasIcon={true}>
-                Successfully submitted
-              </Alert>
-            )}
-            <Button
-              type='submit'
-              variation='primary'
-              style={{ marginBottom: "30px" }}
-            >
-              Submit Question
-            </Button>
-          </Flex>
-        </form>
-      </div>
-      <Footer />
-    </View>
-  ): (
-    <View
-    className='App'
-    style={{
-      minHeight: "100vh",
-      paddingBottom: "50px",
-      boxSizing: "border-box",
-      paddingTop: "100px",
-    }}
-    >
-      <Header />
-      <div style={{ maxWidth: "500px", margin: "auto" }}>
-          <div>
-            {/* Render unauthorized access message */}
-            <h1>Unauthorized Access</h1>
-            <p>You do not have permission to access this page.</p>
-            <p>Your current role is viewer only!</p>
-            <p>Contact administrator to update role</p>
+                {submitted && (
+                  <Alert
+                    variation='success'
+                    isDismissible={true}
+                    hasIcon={true}
+                  >
+                    Successfully submitted
+                  </Alert>
+                )}
+                <Button
+                  type='submit'
+                  variation='primary'
+                  style={{ marginBottom: "30px" }}
+                >
+                  Submit Question
+                </Button>
+              </Flex>
+            </form>
           </div>
-      </div>
-      <Footer />
-    </View>
-
-  )}
-  </div>
+          <Footer />
+        </View>
+      ) : (
+        <View
+          className='App'
+          style={{
+            minHeight: "100vh",
+            paddingBottom: "50px",
+            boxSizing: "border-box",
+            paddingTop: "100px",
+          }}
+        >
+          <Header />
+          <div style={{ maxWidth: "500px", margin: "auto" }}>
+            <div>
+              {/* Render unauthorized access message */}
+              <h1>Unauthorized Access</h1>
+              <p>You do not have permission to access this page.</p>
+              <p>Your current role is viewer only!</p>
+              <p>Contact administrator to update role</p>
+            </div>
+          </div>
+          <Footer />
+        </View>
+      )}
+    </div>
   );
 };
 
