@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { fetchUserAttributes } from '@aws-amplify/auth';
 import Header from "./Header";
 import {
   Button,
@@ -12,6 +13,7 @@ import {
   Loader,
 } from "@aws-amplify/ui-react";
 import { post, get } from "aws-amplify/api";
+import { getUserInfo } from "./utils";
 import "./Contribute.css";
 import Footer from "./Footer";
 
@@ -25,6 +27,27 @@ const ContributePage = () => {
   const [options, setOptions] = useState([]);
   const [isTextFieldVisible, setTextFieldVisible] = useState(false);
   const [topicInput, setTopicInput] = useState("");
+  const [userRole, setUserRole] = useState(null);
+  const [userLoading, setUserLoading] = useState(true);
+
+
+
+  useEffect(()=>{
+    const getUsers = async () => {
+      try {
+        const { role, email } = await getUserInfo();
+        console.log(email);
+        setUserRole(role);
+        setUserLoading(false);
+      } catch (error) {
+        console.error(error);
+        setUserLoading(false);
+      }
+    };
+    getUsers();
+  }, [])
+
+
 
   const getTopics = async () => {
     try {
@@ -112,6 +135,12 @@ const ContributePage = () => {
   };
 
   return (
+
+  <div>
+  {userLoading ? (
+    <Loader />
+  )
+  : userRole === 'admin' || userRole === 'contributor' ? (
     <View
       className='App'
       style={{
@@ -232,6 +261,31 @@ const ContributePage = () => {
       </div>
       <Footer />
     </View>
+  ): (
+    <View
+    className='App'
+    style={{
+      minHeight: "100vh",
+      paddingBottom: "50px",
+      boxSizing: "border-box",
+      paddingTop: "100px",
+    }}
+    >
+      <Header />
+      <div style={{ maxWidth: "500px", margin: "auto" }}>
+          <div>
+            {/* Render unauthorized access message */}
+            <h1>Unauthorized Access</h1>
+            <p>You do not have permission to access this page.</p>
+            <p>Your current role is viewer only!</p>
+            <p>Contact administrator to update role</p>
+          </div>
+      </div>
+      <Footer />
+    </View>
+
+  )}
+  </div>
   );
 };
 
