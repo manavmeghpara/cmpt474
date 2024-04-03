@@ -228,15 +228,15 @@
       "function": {
         "cmpt474PostConfirmation": {
           "deploymentBucketName": "amplify-cmpt474-mnew-11729-deployment",
-          "s3Key": "amplify-builds/cmpt474PostConfirmation-75776479365272496a49-build.zip"
+          "s3Key": "amplify-builds/cmpt474PostConfirmation-42716271757031324541-build.zip"
         },
         "questionsLambda": {
           "deploymentBucketName": "amplify-cmpt474-mnew-11729-deployment",
-          "s3Key": "amplify-builds/questionsLambda-4a6d70736b386d584b4a-build.zip"
+          "s3Key": "amplify-builds/questionsLambda-48777051445950376d32-build.zip"
         },
         "topicLambda": {
           "deploymentBucketName": "amplify-cmpt474-mnew-11729-deployment",
-          "s3Key": "amplify-builds/topicLambda-394c666f4c6f54304664-build.zip"
+          "s3Key": "amplify-builds/topicLambda-4142646a587859654b67-build.zip"
         },
         "topicsTableTrigger3a854fee": {
           "deploymentBucketName": "amplify-cmpt474-mnew-11729-deployment",
